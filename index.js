@@ -9,9 +9,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: 'https://alhproperties-ry5d.vercel.app/', // Allow requests from this origin
-  methods: ['GET', 'POST'], // Allow only specified methods
-  credentials: true, // Allow including cookies in requests (if using sessions/cookies)
+  origin: 'https://alhproperties-ry5d.vercel.app', // Remove the trailing slash
+  methods: ['GET', 'POST'],
+  credentials: true,
 }));
 
 app.post('/submit-floorplan-form', (req, res) => {
@@ -36,16 +36,15 @@ const transporter = nodemailer.createTransport({
 
 // Handle form submissions
 app.post('/submit-form', (req, res) => {
-  const formName = req.body['formName']; 
+  
   const leadName = req.body['Lead-Name'];
   const leadPhone = req.body['Lead-Phone'];
   const leadEmail = req.body['Lead-Email'];
-
   // Create an email content based on the form data
   const mailOptions = {
     from: leadEmail,
     to: 'sabesofteng@gmail.com', 
-    subject: `New form submission - ${formName}`,
+    subject: `New form submission - `,
     html: `<p>Name: ${leadName}</p><p>Email: ${leadEmail}</p><p>Phone: ${leadPhone}</p>`
   };
 
